@@ -1,23 +1,59 @@
 const express = require('express');
 const router = express.Router(); 
+const Competitor = require("../models/competitor.js") ; 
 const User = require("../models/user.js") ; 
 
 
-/*
-I have added the next argument in the callback functions
-which refers to the next middleware , in my case the error handler
-middleware . :P 
-*/
 
 
-// getting a list of all users 
-router.get('/users' , function(req , res , next){
-	User.find({}).then(function(users){
-			  res.send(users); 
+
+// getting a list of all the competitors 
+router.get('/competitors' , function(req , res , next){
+	Competitor.find({}).then(function(competitors){
+			  res.send(competitors); 
 	});
 }); 
 
+//adding a  new competitor with his email
+router.post('/addcompetitor' , function(req , res , next){
+	User.find({"email" :req.body.email}).then(function(result){
+		if(result.length<1){
+               res.send(" the user is unfound"); 
+		}else {
+			var data = {
+				idCompetitor : result[0]._id
+			}
+			Competitor.find(data).then(function(reslt){
+				if(reslt.length>0){
+                     res.send("the user is already a competitor ");
+				}else{
+                     Competitor.create(data).then(function(competitor){
+							res.send(competitor);
+					}).catch(next); 
+				}
+			});
+		}
+	}).catch(next) ; 
+}); 
 
+
+// getting a list of all the competitors informations '
+router.get('/competitorsInfo' , function(req , res , next){
+	Competitor.find({}).then(function(competitors){
+		     var data  = {} ; 
+			 for (var i = competitors.length - 1; i >= 0; i--) {
+			  	console.log(competitors[i].idCompetitor);
+			    User.find({"_id" :competitors[i].idCompetitor}).then(function(user){
+			    	 data 
+			    }); 
+
+			  } 
+	});
+});
+
+
+
+/*
 //getting a user with an email 
 router.get('/user' , function(req , res , next){
 	 var query = { "email" : req.query.email}  ; 
@@ -70,8 +106,8 @@ router.post('/logincheck' , function(req , res , next){
 	var query = req.body  ; 
 	User.find(query).then(function(user){
 		  if(user.length<1) res.json({"response" : false}); 
-		  else res.json(user); 
+		  else res.json({"response" : true}); 
 	});
 });
-
+*/
 module.exports = router; 

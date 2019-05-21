@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 //initializing routes 
 app.use("/api", require("./routes/admin")); 
 app.use("/api", require("./routes/user")); 
+app.use("/api", require("./routes/competitor")); 
 
 // the error handler middleware
 app.use(function( err , req , res , next){
