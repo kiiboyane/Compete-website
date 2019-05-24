@@ -1,26 +1,29 @@
 const mongoose = require("mongoose"); 
-const Schema = mongoose.Schema ; 
+const Schema = mongoose.Schema ;  
 
 const ContestSchema = new Schema({
-	publicationDate :{
+	registrationDate :{// le delai pour s'inscrire 
 		type : Date 
 	},
-	registrationDate :{
-		type : Date 
+	submissionDate :{// le delai pour poser une solution au probleme 
+		type : Date
 	},
-	submissionDate :{
+	ResultDate :{// le delai pour le resultat des jury 
 		type : Date
 	},
 	Desciption :{
 		type : String , 
 		required : [true , " Chaque compétition doit y avoir une description !! "]
-	}
+	},
 	titre :{
 		type : String , 
 		required : [true , " Chaque compétition doit y avoir un titre !! "]
-	}
+	},
+	winner : String,
+	jury: [],
+	consigne : []  
 }) ; 
 
-const  Contest = mongoose.model('contest' , UserSchema);
+const  Contest = mongoose.model('contest' , ContestSchema);
 
 module.exports = Contest  ; 

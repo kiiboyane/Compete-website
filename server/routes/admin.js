@@ -6,37 +6,58 @@ const { check } = require('express-validator/check');
 
 
 // getting a list of all admins 
-adminrouter.get('/admin' , function(req , res , next){
+adminrouter.get('/admins' , function(req , res , next){
 	Admin.find({}).then(function(admins){
 			  res.send(admins); 
 	});
 }); 
+adminrouter.get('/adminsinfo' , function(req , res , next){
+	Admin.find({}).then(function(admins){
+	         var users = []; 
+		     var data  = {"_id" : []} ; 
+			 for (var i = admins.length - 1; i >= 0; i--) {
+			  	data["_id"].push(admins[i].idUser);
+			  }
+			   User.find(data).then(function(user){
+			    	 users = user;
+			    }).then(()=> res.send(users));
+	}); 
+}); 
 
-/*
+
 //getting a admin with an email 
-router.get('/admin' , function(req , res , next){
-	// var query = { "email" : req.query.email}  ; 
-	 Admin.find(query).then(function(admin){
-	 	  res.send(admin); 
+adminrouter.get('/admin' , function(req , res , next){
+	 var query = { "email" : req.body.email}; 
+	 User.find(query).then(function(user){
+	 	   console.log(user)
+	 	   if(user.length>0){
+		 	   var anotherquery = {"idUser" : user[0]._id}; 
+		 	   Admin.find(anotherquery).then(function(admin){
+		 	   	   if(admin.length>0) 
+		 	   	   	       res.send(user);
+		 	   	   	else res.send("the user is not an admin"); 
+		 	   });
+	 	   }else{
+	 	   	    res.send("the email belong to no user");
+	 	   }
 	 });
-});*/
+});
 
 //adding a  new admin
 adminrouter.post('/addadmin' , function(req , res , next){
 	//console.log(req.body); 
 	//create is a Promise so we have to wait it until it finishes
-	var id =  req.body.idUser ; 
-	console.log(id); 
+	var id =  req.body.idUser ;  
 	if (id.match(/^[0-9a-fA-F]{24}$/)) {
-		User.findById( req.body.idUser).then(function(user) {
+		User.findById(req.body.idUser).then(function(user) {
 			console.log(user); 
 			if (user) {
-				 Admin.find(req.body).then(function(value){
+				 Admin.find(req.body.idUser).then(function(value){
                          if(value.length>0){
-							    console.log(value); 
                                 res.send("the user already is an admin "); 
 						 }else {
-								Admin.create(req.body).then(function(admin){
+						 	    var data = {"idUser" : req.body.idUser}; 
+								Admin.create(data).then(function(admin){
 									res.send(admin);
 							   }).catch(next);
 						 }
@@ -49,32 +70,41 @@ adminrouter.post('/addadmin' , function(req , res , next){
     
 	 
 }); 
+//adding a  new admin by email
+adminrouter.post('/addadminbyemail' , function(req , res , next){
+	//console.log(req.body); 
+	//create is a Promise so we have to wait it until it finishes
+	var id =  req.body.email ;  
+		User.find({"email" :req.body.email}).then(function(user) {
+			if (user.length>0) {
+				 Admin.find({"idUser" :user[0]._id}).then(function(value){
+				 	     console.log(value);
+                         if(value.length>0){
+                                res.send("the user already is an admin "); 
+						 }else {
+						 	    console.log(user[0]._id); 
+						 	    var data = {"idUser" : user[0]._id }; 
+								Admin.create(data).then(function(admin){
+									res.send(admin);
+							   }).catch(next);
+						 }
+				 }); 
+			}else {
+				 return res.send("the admin must be already a user") ;
+			}
+		  });  
+    
+	 
+}); 
 
-
-
-//delete a user 
+//delete an admin  
 adminrouter.delete('/deleteadmin/:id' , function(req , res, next){
 	 Admin.findByIdAndRemove({_id : req.params.id}).then(function(admin){
      				res.send(admin); 
 	 }); 
 }); 
 
-//update a user 
-adminrouter.put('/updateadmin/:id' , function(req , res , next){
-	 Admin.findByIdAndUpdate({_id : req.params.id} , req.body).then(function(){
-			Admin.findOne({_id : req.params.id}).then(function(admin){
-				res.send(admin); 
-		    }); 
-	 }); 
-}); 
 
-/*// check the user if it exists and the password if it is correct 
-router.post('/logincheck' , function(req , res , next){
-	var query = req.body  ; 
-	User.find(query).then(function(user){
-		  if(user.length<1) res.json({"response" : false}); 
-		  else res.json({"response" : true}); 
-	});
-});*/
+
 
 module.exports = adminrouter; 

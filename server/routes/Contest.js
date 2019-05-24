@@ -46,22 +46,19 @@ router.get('/adduser' , function(req , res , next){
 
 
 //delete a user 
-router.delete('/deleteuser/:_id' , function(req , res, next){
-	console.log(req.params._id);
-	 User.findByIdAndRemove({_id : req.params._id}).then(function(user){
-	 	console.log(user);
-     	res.send(user); 
+router.delete('/deleteuser/:id' , function(req , res, next){
+	 User.findByIdAndRemove({_id : req.params.id}).then(function(user){
+     				res.send(user); 
 	 }); 
 }); 
 
 
 
 //update a user 
-router.put('/updateuser/:id'  , function(req , res , next){
-	console.log(req.params.id);
-	 User.findByIdAndUpdate({_id : req.params.id}, req.body).then(function(){
+router.put('/updateuser/:id' , function(req , res , next){
+	 User.findByIdAndUpdate({_id : req.params.id} , req.body).then(function(){
 			User.findOne({_id : req.params.id}).then(function(user){
-				    res.send(user); 
+				res.send(user); 
 		    }); 
 	 }); 
 }); 
