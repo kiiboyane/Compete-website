@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "cd client && npm start",
-    "server": "cd server && npm start",
-    "start": "concurrently - kill-others  \"npm run server\" \"npm run client\""
+    "client": "npm start --prefix client",
+    "server": "npm start --prefix server",
+    "start": "concurrently \"npm server0 --prefix server\"  \"npm start --prefix client\"",
+    "client-install": "npm install --prefix client",
+    "server-install": "npm install --prefix server"
   },
   "keywords": [],
   "author": "",

@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Jumbotron,Container, Row, Col, Image, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Jumbotron, Grid, Row, Col, Image, Button } from 'react-bootstrap';
 import './Home.css';
-import ContestWrapper from ContestWrapper.jsx;
 
 export default class Home extends Component {
 
@@ -41,17 +40,18 @@ export default class Home extends Component {
 
   render() {
 
-    contestWrapper=this.state.liste.map((contest)=>{
-        <Col xs={12} sm={4} className="person-wrapper" key={contest.id}>
-              <Image src={contest.img} circle className="profile-pic"/>
-              <h3>{contest.titre}</h3>
-              <p>{contest.samaary}</p>
-        </Col>
+    const contestWrapper=this.state.liste.map((contest)=>{
+       return(
+       <Col xs={12} sm={4} className="person-wrapper" key={contest.id}>
+          <Image src={contest.img} circle className="profile-pic"/>
+          <h3>{contest.titre}</h3>
+          <p>{contest.samaary}</p>
+        </Col>) 
     });
 
 
     return (
-      <Grid>
+      <Container>
         <Jumbotron>
           <h2>Bienvenue sur WORLD-Competition</h2>
           <p>Ceci est une plateforme Réalisé à l'ENSIAS pour la gestions des compétions</p>
@@ -61,10 +61,10 @@ export default class Home extends Component {
         </Jumbotron>
 {/*         pour charger la liste au demarage
         onLoad={this.chargerHome} */}
-        <Row className="show-grid text-center" >  
+        <Row className="show-Container text-center" >  
           {contestWrapper}
         </Row>
-      </Grid>
+      </Container>
     )
   }
 }
