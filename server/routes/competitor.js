@@ -37,43 +37,44 @@ router.post('/addcompetitor' , function(req , res , next){
 }); 
 
 // getting a list of all the competitors informations '
-router.get('/competitorsInfo' , function(req , res , next){
+router.get('/competitorsinfo' , function(req , res , next){
 	Competitor.find({}).then(function(competitors){
-		     var data  = {} ; 
+		     var users = []; 
+		     var data  = {"_id" : []} ; 
 			 for (var i = competitors.length - 1; i >= 0; i--) {
-			  	console.log(competitors[i].idCompetitor);
-			 /*   User.find({"_id" :competitors[i].idCompetitor}).then(function(user){
-			    	 data 
-			    }); */
-
+			  	   data["_id"].push(competitors[i].idCompetitor);
 			  } 
+			   User.find(data).then(function(user){
+			    	 users = user;
+			    }).then(()=> res.send(users));
 	});
+
 });
 
 
 
 //delete a competitor
-router.delete('/deletecompetitor/:id' , function(req , res, next){
-	 Competitor.findByIdAndRemove({_id : req.params.id}).then(function(competitor){
+router.delete('/deletecompetitor/:_id' , function(req , res, next){
+	 Competitor.findByIdAndRemove(req.params).then(function(competitor){
      				res.send(competitor); 
 	 }); 
 }); 
 
-//update a competitor 
-router.put('/updatecompetitor/:id' , function(req , res , next){
-	 Competitor.findByIdAndUpdate({_id : req.params.id} , req.body).then(function(){
-			Competitor.findOne({_id : req.params.id}).then(function(competitor){
-				res.send(competitor); 
-		    }); 
-	 }); 
-}); 
 
+var i =0 ; 
 
-//getting a user with an email 
 router.get('/competitor' , function(req , res , next){
-	 var query = { "email" : req.query.email}  ; 
-	 User.find(query).then(function(competitor){
-	 	  res.send(competitor); 
+	 var query = { "email" : req.body.email}  ; 
+	 console.log(query);
+	 User.find(query).then(function(user){
+	 	  console.log(user[0]);
+	 	  var data = {"idCompetitor" : user[0]._id };  
+	 	  console.log(data);
+	 	  Competitor.find( {}).then(function(competitor){
+	 	  	     console.log(competitor); 
+	 	  	     res.send(competitor); 
+	 	  
+	 	});
 	 });
 });
 

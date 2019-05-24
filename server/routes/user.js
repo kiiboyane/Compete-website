@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router(); 
 const User = require("../models/user.js") ; 
+const Competitor = require("../models/competitor.js") ; 
+const Jury = require("../models/jury.js") ; 
+const Admin = require("../models/admin.js") ; 
 
 
 /*
@@ -45,13 +48,14 @@ router.get('/adduser' , function(req , res , next){
 }); 
 
 
-//delete a user 
+//delete a user // quand tu supprimes un utilisateur tu dois supprimer ses comptes admin et competitor ect 
 router.delete('/deleteuser/:_id' , function(req , res, next){
-	console.log(req.params._id);
+	 console.log(req.params._id);
 	 User.findByIdAndRemove({_id : req.params._id}).then(function(user){
 	 	console.log(user);
      	res.send(user); 
-	 }); 
+	 });
+
 }); 
 
 
