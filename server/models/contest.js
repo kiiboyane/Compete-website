@@ -1,4 +1,5 @@
 const mongoose = require("mongoose"); 
+const mongoosastic = require('mongoosastic');
 const Schema = mongoose.Schema ;  
 
 const ContestSchema = new Schema({
@@ -13,7 +14,8 @@ const ContestSchema = new Schema({
 	},
 	Desciption :{
 		type : String , 
-		required : [true , " Chaque compétition doit y avoir une description !! "]
+		required : [true , " Chaque compétition doit y avoir une description !! "],
+		es_indexed:true
 	},
 	titre :{
 		type : String , 
@@ -23,6 +25,7 @@ const ContestSchema = new Schema({
 	jury: [],
 	consigne : []  
 }) ; 
+ContestSchema.plugin(mongoosastic);
 
 const  Contest = mongoose.model('contest' , ContestSchema);
 

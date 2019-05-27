@@ -2,19 +2,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema ; 
 
 
-const ContestSolution = new Schema({
+const ContestSolutionSchema = new Schema({
 	juryid : {
-        type : String , 
-        unique : true 
-    },
+           type : String , 
+           required : true
+	},
     teamid : {
-    	type : string , 
-    	unique : true
-    },
-    grid_marks : [] ;
+           type : String , 
+           required : true
+	},
+    grid_marks : [] 
 
 }); 
 
-const  Team = mongoose.model('team' , TeamSchema);
+const  ContestSolution = mongoose.model('contestSolution' , ContestSolutionSchema);
 
-module.exports = Team; 
+module.exports = ContestSolution; 

@@ -29,6 +29,10 @@ app.use(bodyParser.json());
 app.use("/api", require("./routes/admin")); 
 app.use("/api", require("./routes/user")); 
 app.use("/api", require("./routes/competitor")); 
+app.use("/api", require("./routes/jury")); 
+app.use("/api", require("./routes/contest")); 
+app.use("/api", require("./routes/team")); 
+app.use("/api", require("./routes/contestSolution")); 
 
 // the error handler middleware
 app.use(function( err , req , res , next){

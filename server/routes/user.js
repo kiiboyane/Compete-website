@@ -29,6 +29,14 @@ router.get('/user' , function(req , res , next){
 	 });
 });
 
+//getting a user with an email 
+router.post('/user/:id' , function(req , res , next){
+	 var query = { "_id" : req.params.id}  ; 
+	 User.find(query).then(function(user){
+	 	  res.send(user); 
+	 });
+});
+
 //adding a  new user
 router.get('/adduser' , function(req , res , next){
 	//create is a Promise so we have to wait it until it finishes 
@@ -51,10 +59,17 @@ router.get('/adduser' , function(req , res , next){
 //delete a user // quand tu supprimes un utilisateur tu dois supprimer ses comptes admin et competitor ect 
 router.delete('/deleteuser/:_id' , function(req , res, next){
 	 console.log(req.params._id);
-	 User.findByIdAndRemove({_id : req.params._id}).then(function(user){
-	 	console.log(user);
-     	res.send(user); 
-	 });
+	 User.findOneAndRemove({_id : req.params._id}).then(function(user){
+	 	Admin.findOneAndRemove({"idUser" : req.params._id}).then(function(admin){
+	 		  Jury.findOneAndRemove({"idUser" : req.params._id}).then(function(jury){
+	 		      Competitor.findOneAndRemove({"idCompetitor" : req.params._id}).then(function(competitor){
+	 		            res.send(user); 
+	 	          }); 
+	 	     });
+	 	});
+
+
+	});
 
 }); 
 

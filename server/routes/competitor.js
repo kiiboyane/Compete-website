@@ -37,7 +37,7 @@ router.post('/addcompetitor' , function(req , res , next){
 }); 
 
 // getting a list of all the competitors informations '
-router.get('/competitorsinfo' , function(req , res , next){
+router.get('/competitorsinfos' , function(req , res , next){
 	Competitor.find({}).then(function(competitors){
 		     var users = []; 
 		     var data  = {"_id" : []} ; 
@@ -61,24 +61,20 @@ router.delete('/deletecompetitor/:_id' , function(req , res, next){
 }); 
 
 
-var i =0 ; 
-
-router.get('/competitor' , function(req , res , next){
-	 var query = { "email" : req.body.email}  ; 
+// finding competitor by email 
+router.get('/competitor' , function(req, res, next){
+	 var query = {"email" : req.body.email}  ; 
 	 console.log(query);
 	 User.find(query).then(function(user){
 	 	  console.log(user[0]);
 	 	  var data = {"idCompetitor" : user[0]._id };  
 	 	  console.log(data);
-	 	  Competitor.find( {}).then(function(competitor){
+	 	  Competitor.find(data).then(function(competitor){
 	 	  	     console.log(competitor); 
-	 	  	     res.send(competitor); 
-	 	  
+	 	  	     res.send(user); 
 	 	});
-	 });
+	});
 });
-
- 
 
 
 
