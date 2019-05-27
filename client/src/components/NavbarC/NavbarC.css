@@ -1,28 +1,6 @@
-.navhauter{
-    height: 110px;
-  }
-  
-  
-  .navbar {
-    margin-bottom: 0;
-    background-color: #2edd17;
-    z-index: 9999;
-    border: 0;
-    font-size: 14px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 4px;
-    border-radius: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
 
-  .navbar li a, .navbar .navbar-brand {
-    color: #fff !important;
-  }
   
-  .navbar-default .navbar-toggle {
-    border-color: transparent;
-    color: #fff !important;
-  }
+ 
   .navcolor:hover{
     background: rgb(143, 194, 145);
     color:#f4511e;
@@ -31,14 +9,42 @@
     background: rgb(4, 102, 28);
     color:#f4511e;
   }
-  .navbar-brand{
-    background-color: #0e4b06;
-  }
-  .navClass{
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-    width:100%;
-    background-color: green;
-    border: 2px solid #4CAF50;
-  }
+ 
+
+  .navbar {
+    -webkit-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    border: none;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border-color: none;
+}
+.navbar-header {
+  float: left;
+}
+.navbar-push {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.navbar-push {
+  right: 0;
+  -webkit-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+.navbar-default .navbar-toggle {
+  border-color: #ddd;
+}
+.navbar-brand {
+  float: left;
+  padding: 0;
+  width: 145px;
+  height: 50px;
+  padding-left: 15px;
+}

@@ -5,7 +5,7 @@ export default class InfoUser extends Component {
   render() {
     return (
       <div>
-        
+        info user + edit
       </div>
     )
   }

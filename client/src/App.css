@@ -31,3 +31,15 @@
     transform: rotate(360deg);
   }
 } */
+
+.appBody {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.f{
+  color: rgb(209, 14, 95)
+}
