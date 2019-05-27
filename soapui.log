@@ -1,0 +1,5 @@
+2019-05-24 16:43:48,248 WARN  [DefaultSoapUICore] Missing folder [C:\Users\Kiibo\ext] for external libraries
+2019-05-24 16:43:48,594 INFO  [DefaultSoapUICore] initialized soapui-settings from [C:\Users\Kiibo\soapui-settings.xml]
+2019-05-24 16:43:49,236 INFO  [WorkspaceImpl] Loading workspace from [C:\Users\Kiibo\intellij-soapui-workspace.xml]
+2019-05-24 16:44:48,348 INFO  [WorkspaceImpl] Saved workspace to [C:\Users\Kiibo\intellij-soapui-workspace.xml]
+2019-05-24 16:44:48,357 INFO  [DefaultSoapUICore] Settings saved to [C:\Users\Kiibo\soapui-settings.xml]

@@ -47,16 +47,17 @@ adminrouter.get('/admin' , function(req , res , next){
 adminrouter.post('/addadmin' , function(req , res , next){
 	//console.log(req.body); 
 	//create is a Promise so we have to wait it until it finishes
-	var id =  req.body.idUser ;  
+	var id =  req.body._id ;  
+	console.log(id);
 	if (id.match(/^[0-9a-fA-F]{24}$/)) {
-		User.findById(req.body.idUser).then(function(user) {
+		User.findById(req.body._id).then(function(user) {
 			console.log(user); 
 			if (user) {
-				 Admin.find(req.body.idUser).then(function(value){
+				 Admin.find({"idUser" : req.body._id}).then(function(value){
                          if(value.length>0){
                                 res.send("the user already is an admin "); 
 						 }else {
-						 	    var data = {"idUser" : req.body.idUser}; 
+						 	    var data = {"idUser" : req.body._id}; 
 								Admin.create(data).then(function(admin){
 									res.send(admin);
 							   }).catch(next);

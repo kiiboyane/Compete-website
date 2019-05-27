@@ -12,40 +12,81 @@ middleware . :P
 
 
 // getting a list of all Jurys 
-router.get('/jurys' , function(req , res , next){
-	Jury.find({}).then(function(jurys){
-			  res.send(jurys); 
+router.get('/juries' , function(req , res , next){
+	Jury.find({}).then(function(juries){
+			  res.send(juries); 
 	});
 }); 
 
 
+// getting a list of all the Jury informations '
+router.get('/juriesinfos' , function(req , res , next){
+	Jury.find({}).then(function(juries){
+		     var users = []; 
+		     var data  = {"_id" : []} ; 
+			 for (var i = juries.length - 1; i >= 0; i--) {
+			  	   data["_id"].push(juries[i].idUser);
+			  } 
+			   User.find(data).then(function(user){
+			    	 users = user;
+			    }).then(()=> res.send(users));
+	});
+
+});
+
 //getting a Jury with an email // to test 
-router.get('/Jury' , function(req , res , next){
+router.get('/jury' , function(req , res , next){
 	 var query = { "email" : req.body.email}  ; 
-     User.find(query).then(function(Jury){
-	 	  res.send(Jury); 
+     User.find(query).then(function(user){
+           if(user[0]){
+       	 	  Jury.find({"idUser" : user[0]._id}).then(function(jury){
+	 	  	     if(jury.length>0){
+                       res.send(jury[0]);
+ 	 	  	     }else{
+ 	 	  	     	res.send("jury not found"); 
+	 	  	     }
+	 	     }); 
+           }else{
+           	  res.send("user not found");
+           }
 	 });
 });
 
-//adding a  new Jury
-/*router.get('/addjury' , function(req , res , next){
-	//create is a Promise so we have to wait it until it finishes 
-	Jury.find({"email" :req.body.email}).then(function(result){
-		if(result.length>0){
-               res.send(" the Jury already exists"); 
-		}else {*/
-			/*console.log("req") ; 
-			console.log(req.body) ; */
-/*			Jury.create(req.body).then(function(Jury){
-				//console.log(Jury); 
-				res.send(Jury);
-			}).catch(next); 
-		}
-	}) ; 
-	
+//getting a Jury with an email // to test 
+router.post('/jury/:id' , function(req , res , next){
+	 var query = { "_id" : req.params.id}  ; 
+     Jury.find(query).then(function(jury){
+	 	  	     if(jury.length>0){
+                       res.send(jury[0]);
+ 	 	  	     }else{
+ 	 	  	     	res.send("jury not found"); 
+	 	  	     }
+	 	  }); 
+	 
 });
 
-*/
+
+//adding a  new Jury using e-mail 
+router.post('/addjury' , function(req , res , next){
+	//create is a Promise so we have to wait it until it finishes 
+	User.find({"email" :req.body.email}).then(function(user){
+		if(user.length==0){
+               res.send(" the Jury must be a user first "); 
+		}else {
+			Jury.find({"idUser" : user[0]._id}).then(function(jury){
+			   if(jury.length>0){
+                    res.send("the Jury exists !");
+			   }else{
+                   Jury.create({"idUser" : user[0]._id}).then(function(result){
+						res.send(result);
+					}).catch(next); 
+			   }
+			});
+		}
+	}) ; 
+});
+
+
 //delete a Jury 
 router.delete('/deletejury/:id' , function(req , res, next){
 	 Jury.findByIdAndRemove({_id : req.params.id}).then(function(jury){
