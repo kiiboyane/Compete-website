@@ -191,32 +191,32 @@ function App() {
             </ListItem>
           </a>
           <a href="/accueil" style={{textDecoration:"none",color:"black"}}>
-            <ListItem button key="accueil" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/accueil"))}>
+            <ListItem button key="accueil" >
               <ListItemIcon><i class="material-icons">account_balance</i></ListItemIcon>
               <ListItemText primary="ACCUEIL" />
             </ListItem>
           </a>
           <a href="/about" style={{textDecoration:"none",color:"black"}}>
-            <ListItem button key="about" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/about"))}>
+            <ListItem button key="about" >
               <ListItemIcon><i class="material-icons">vertical_split</i></ListItemIcon>
               <ListItemText primary="A PROPOS" />
             </ListItem>
           </a>
             <a href="/listContest" style={{textDecoration:"none",color:"black"}}>
-              <ListItem button key="listcontest" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/listContest"))}>
+              <ListItem button key="listcontest" >
               <ListItemIcon><i class="material-icons">search</i></ListItemIcon>
               <ListItemText primary="Voir Compétitions" />
               </ListItem>
             </a>
             <a href="/login" style={{textDecoration:"none",color:"black"}}>
-              <ListItem button key="login" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/login"))}>
+              <ListItem button key="login" >
               <ListItemIcon><i class="material-icons">settings_power</i></ListItemIcon>
               <ListItemText primary={connexion} />
               {/* //se connecter tout comme voir profil seront remplaces par des variable state... */}
             </ListItem>
             </a>
             <a href="/contact"  style={{textDecoration:"none",color:"black"}}>
-            <ListItem button key="contact" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/contact"))}>
+            <ListItem button key="contact" >
               <ListItemIcon><i class="material-icons">settings_phone</i></ListItemIcon>
                   
                         <ListItemText primary="NOUS CONTACTER" />
@@ -228,7 +228,7 @@ function App() {
         <Divider />
         <List>
         <a href="/contact"  style={{textDecoration:"none",color:"black"}}>
-              <ListItem button key="contact" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/contact"))}>
+              <ListItem button key="contact" >
                         <ListItemIcon><i class="material-icons">done_all</i></ListItemIcon>
                         
                             <ListItemText primary="JURY" />
@@ -250,15 +250,15 @@ function App() {
             <Collapse in={AdminCollapseOpen}>
                 <div style={{paddingLeft:"2em"}} id="example-collapse-text">
                 <a href="/adminPage"  style={{textDecoration:"none",color:"black"}}>
-                  <ListItem button key="adminpage" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/adminPage"))}>
+                  <ListItem button key="adminpage" >
                             <ListItemIcon><i class="material-icons">arrow_right_alt</i></ListItemIcon>
                            
                                 <ListItemText primary="Admin PAGE" />
                             
                       </ListItem>
                 </a>
-                <a href="/adminContest"  style={{textDecoration:"none",color:"black"}}>
-                  <ListItem button key="listcontest" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/adminContest"))}>
+                <a href="/adminContestList"  style={{textDecoration:"none",color:"black"}}>
+                  <ListItem button key="listcontest" >
                         <ListItemIcon><i class="material-icons">list</i></ListItemIcon>
                      
                             <ListItemText primary="Liste COMPETITIONS" />
@@ -266,13 +266,13 @@ function App() {
                    </ListItem>
                   </a>
                   <a href="/adminUser"  style={{textDecoration:"none",color:"black"}}>
-                   <ListItem button key="adminuser" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/adminUser"))}>
+                   <ListItem button key="adminuser" >
                         <ListItemIcon><i class="material-icons">arrow_right_alt</i></ListItemIcon>
                             <ListItemText primary="Admin USERS" />
                    </ListItem>
                    </a>
                    <a href="/soumissionAdmin"  style={{textDecoration:"none",color:"black"}}>
-                    <ListItem button key="listesoumission" onClick={()=>this.fakeAuth.signout(() =>this.props.history.push("/soumissionAdmin"))}>
+                    <ListItem button key="listesoumission" >
                           <ListItemIcon><i class="material-icons">list</i></ListItemIcon>
                               <ListItemText primary="Liste des soumis" />
                     </ListItem>

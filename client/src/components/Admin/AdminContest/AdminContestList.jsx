@@ -1,14 +1,16 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 
-export default function AdminContest() {
+export default function AdminContestList() {
   const [state, setState] = React.useState({
     columns: [
       { title: 'Titre', field: 'name' },
-      { title: 'Le Rendu', field: 'leRendu' },
+      { title: 'fichier attendu', field: 'leRendu' },
+      { title: 'Description', field: 'description' },
       { title: 'Date de creation', field: 'date', type: 'date' },
-      { title: 'Delai', field: 'delai en jour', type: 'numeric' },
-      
+      { title: 'Date de fin', field: 'dateEnd', type: 'date' },
+      { title: 'Delai', field: 'delai', type: 'numeric' },
+       { title: 'Winner', field: 'winner'},
       {
         title: 'Jurys',
         field: 'jury',
@@ -16,15 +18,18 @@ export default function AdminContest() {
       },
     ],
     data: [
-      { name: 'Mehmet', leRendu: 'Baran',date:1987, delai:15 , jury: 63 },
+      { name: 'Mehmet', leRendu: 'APK avec pdf dans un zip',description:"alors on doit normalement mettre une  description ici pour mieux decrire le proble ela solution attenducolumns: title: string; field: string; type undefined; lookupundefined;title: string; field: string; type: string; lookup undefined; title: string; field: string; lookup: 34: string; 63: stringtype?: undefined;",
+      date:1987,dateEnd:"15/09/2000", delai:15 , jury: 63 },
       {
         name: 'Zerya Betül',
-        leRendu: 'Baran',
+        leRendu: 'APK avec pdf dans un zip',
+        description:"alors on doit normalement mettre une  description ici pour mieux decrire le proble ela solution attendu",
         date:1987,
+        dateEnd:2000,
         delai: 17,
         jury: 34,
       },
-    ],
+    ]
   });
 
   return (
