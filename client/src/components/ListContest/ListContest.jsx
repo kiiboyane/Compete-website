@@ -21,24 +21,24 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, description, annee, jour, mois) {
+  return { name, description, annee, jour, mois };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
+  createData('Cupcake', " alors on ne descrit pas la  soumission", 2001, 6, 4),
+  createData('Donut', "il faut le faut le faire pour plus de vivabilité", 2003, 5, 4),
+  createData('Eclair', "ça pourra donner plus de point", 2011, 2, 6),
+  createData('Frozen yoghurt', "il faut y croire ", 2006., 2, 4),
+  createData('Gingerbread', "on vous le dit par experience et l'experience fait vraiment les choses", 2003, 49, 9),
+  createData('Honeycomb', "tu y cros ou pas", 2001, 8,5),
+  createData('Ice cream sandwich', "bah il faudra y coire", 2009, 3,3),
+  createData('Jelly Bean', "sinon moi je suis en mode suivi simple", 2007, 9, 10),
+  createData('KitKat',"qui sait", 2016, 6,3 ),
+  createData('Lollipop'," sinon moi je suis en mode suivi simple", 2014, 9, 10),
+  createData('Marshmallow', "sinon moi je suis en mode suivi simple", 2005, 1, 10),
+  createData('Nougat', "sinon moi je suis en mode suivi simple", 2009, 9, 3),
+  createData('Oreo',"sinon moi je suis en mode suivi simple", 2017, 6, 4),
 ];
 
 function desc(a, b, orderBy) {
@@ -67,10 +67,10 @@ function getSorting(order, orderBy) {
 
 const headRows = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Titre' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  { id: 'description', numeric: true, disablePadding: false, label: 'description' },
+  { id: 'annee', numeric: true, disablePadding: false, label: 'annee' },
+  { id: 'jour', numeric: true, disablePadding: false, label: 'jour (g)' },
+  { id: 'mois', numeric: true, disablePadding: false, label: 'mois (g)' },
 ];
 
 function EnhancedTableHead(props) {
@@ -210,7 +210,7 @@ const useStyles = makeStyles(theme => ({
 function ListContest() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('description');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -249,6 +249,8 @@ function ListContest() {
     }
 
     setSelected(newSelected);
+
+    window.location.href="/soumetre"
   }
 
   function handleChangePage(event, newPage) {
@@ -309,10 +311,10 @@ function ListContest() {
                       <TableCell component="th" scope="row" padding="none">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.description}</TableCell>
+                      <TableCell align="right">{row.annee}</TableCell>
+                      <TableCell align="right">{row.jour}</TableCell>
+                      <TableCell align="right">{row.mois}</TableCell>
                     </TableRow>
                   );
                 })}

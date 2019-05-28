@@ -35,9 +35,10 @@ import Home from './components/Home/Home.jsx';
 import InfoUser from './components/InfoUser/InfoUser.jsx';
 import ListContest from './components/ListContest/ListContest';
 import VoirSoumission from './components/Jury/VoirSoumission/VoirSoumission';
-import JuryListSoumission from './components/Jury/ListSoumission/ListSoumission';
+import JuryListSoumission from './components/Admin/SoumissionAdmin/SoumissionAdmin';
 import SoumissionAdmin from './components/Admin/SoumissionAdmin/SoumissionAdmin';
 import ForgotPass from './components/Login/ForgotPass'
+import Soumetre from './components/Soumetre/Soumetre';
 
 const drawerWidth = 240;
 
@@ -309,6 +310,7 @@ function App() {
                       <Route  exact path="/listContest" component={ListContest}/>
                       <Route  exact path="/juryListSoumission" component={JuryListSoumission}/>
                       <Route  exact path="/voirSoumission" component={VoirSoumission}/>
+                      <Route  exact path="/soumetre" component={Soumetre}/>
                       <Route path="/forgotpass" component={ForgotPass}/>
                   </div>
                       <Route path="/" component={Footer} />
