@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "npm start --prefix client",
-    "server": "npm start --prefix server",
-    "start": "concurrently \"npm server0 --prefix server\"  \"npm start --prefix client\"",
+    "client": "cd client && npm start",
+    "server": "cd server && npm start",
+    "start": "concurrently - kill-others \"npm run server\" \"npm run client\"",
     "client-install": "npm install --prefix client",
     "server-install": "npm install --prefix server"
   },

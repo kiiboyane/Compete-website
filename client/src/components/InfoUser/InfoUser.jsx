@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router } from "react-router-dom";
+import { App } from "./components/App";
+
+
 
 
 export default class InfoUser extends Component {
-  render() {
-    return (
-      <div>
-        info user + edit
-      </div>
-    )
+  render(){
+    return(
+      <Router>
+        <App />
+      </Router>
+    );
   }
-}
+  }

@@ -43,16 +43,16 @@ class Register extends Component {
     return re.test(String(email).toLowerCase());
   }
   validatePass(password){
-    if (password.length < 8){
-      return false ; 
-    }
-    var hasUpperCase = /[A-Z]/.test(password);
-    var hasLowerCase = /[a-z]/.test(password);
-    var hasNumbers = /\d/.test(password);
-    var hasNonalphas = /\W/.test(password);
-    if (hasUpperCase + hasLowerCase + hasNumbers + hasNonalphas < 3){
-        return false; 
-    }
+    // if (password.length < 8){
+    //   return false ; 
+    // }
+    // var hasUpperCase = /[A-Z]/.test(password);
+    // var hasLowerCase = /[a-z]/.test(password);
+    // var hasNumbers = /\d/.test(password);
+    // var hasNonalphas = /\W/.test(password);
+    // if (hasUpperCase + hasLowerCase + hasNumbers + hasNonalphas < 3){
+    //     return false; 
+    // }
     return true  ; 
   }
   changeFirstName = (e) => {

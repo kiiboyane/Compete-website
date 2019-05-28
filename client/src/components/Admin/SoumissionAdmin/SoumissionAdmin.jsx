@@ -21,24 +21,27 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, nameCompetitor,dateSoumission, langage, NoteGlobal) {
+  return { name, nameCompetitor,dateSoumission, langage, NoteGlobal};
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
+  createData('Detection de Visage', "Omar", "15/09/2017", "java, kotlin", 9),
+  createData('gestion de restau', "Donut", "15/09/2017", "java, kotlin", 9),
+  createData('gestion de competition ', "Omar", "15/09/2017", "java, kotlin", 9),
+  createData('emploie du temps', "Omar", "15/09/2017", "java, kotlin", 9),
+  createData('block note', "Nougat", "15/09/2017", "java, kotlin", 9),
+  createData('transport', "Omar", "15/09/2017", "java, kotlin", 9),
+  createData('compte bancaire', "Marshmallow", "15/09/2017", "java, kotlin", 9),
+  createData('programme du quoptidien', "Honeycomb", "15/09/2017", "java, kotlin", 9),
+  createData('music player', "Omar", "15/09/2017", "java, kotlin", 9),
+  createData('partage de photo', "Ice cream sandwich", "15/09/2017", "java, kotlin", 9),
+  createData('calculatrice', "Lollipop", "15/09/2017", "java, kotlin", 9),
+  createData('habit a porter', "Jelly", "15/09/2017", "java, kotlin", 9),
+  createData('assistant', "Nougat", "15/09/2017", "java, kotlin", 9),
+  createData('guide de visite', "Oreo", "15/09/2017", "java, kotlin", 9),
+  createData('Detection de Visage', "KitKat", "15/09/2017", "java, kotlin", 9),
+ 
 ];
 
 function desc(a, b, orderBy) {
@@ -65,12 +68,13 @@ function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+
 const headRows = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'Nom de la competition' },
+  { id: 'nameCompetitor', numeric: false, disablePadding: true, label: 'Nom du competiteur' },
+  { id: 'dateSoumission', numeric: false,date:true, disablePadding: false, label: 'Date de soumission' },
+  { id: 'langage', numeric: true, disablePadding: false, label: 'Langage Utilisés' },
+  { id: 'NoteGlobal', numeric: false, disablePadding: false, label: 'NoteGlobal' },
 ];
 
 function EnhancedTableHead(props) {
@@ -162,7 +166,7 @@ const EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Nutrition
+            Soumission Liste
           </Typography>
         )}
       </div>
@@ -210,7 +214,7 @@ const useStyles = makeStyles(theme => ({
 function SoumissionAdmin() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('nameCompetitor');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -300,19 +304,19 @@ function SoumissionAdmin() {
                       key={row.name}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell padding="checkbox" orderBy="name">
                       <button><i class="material-icons">
                       cloud_download
                       </i></button>
                         {/* <Checkbox checked={isItemSelected} /> */}
                       </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
+                      <TableCell component="th" scope="row" padding="none" orderBy="name">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right" orderBy="nameCompetitor">{row.nameCompetitor}</TableCell>
+                      <TableCell align="right" orderBy="dateSoumission">{row.dateSoumission}</TableCell>
+                      <TableCell align="right" orderBy="langage">{row.langage}</TableCell>
+                      <TableCell align="right" orderBy="NoteGlobal">{row.NoteGlobal}</TableCell>
                     </TableRow>
                   );
                 })}

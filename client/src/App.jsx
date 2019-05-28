@@ -227,8 +227,8 @@ function App() {
         </List>
         <Divider />
         <List>
-        <a href="/contact"  style={{textDecoration:"none",color:"black"}}>
-              <ListItem button key="contact" >
+        <a href="/jurylistSoumission"  style={{textDecoration:"none",color:"black"}}>
+              <ListItem button key="jurylistSoumission" >
                         <ListItemIcon><i class="material-icons">done_all</i></ListItemIcon>
                         
                             <ListItemText primary="JURY" />

@@ -21,9 +21,8 @@ export default class InfoUser extends Component {
     }
     sendCode = (e) => {
         if(e.target.value!==null){
-           if(e.target.value.localeCompare("7777")){
+           if(!(e.target.value.localeCompare("7777"))){
                document.location.href = "/";
-               
             } 
             else{
                 this.setState({
